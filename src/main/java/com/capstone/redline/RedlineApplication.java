@@ -12,6 +12,7 @@ import conroller.DatabaseController;
 @ComponentScan(basePackages={"conroller", "repository" , "conroller"})
 public class RedlineApplication {
 
+	//test
 	public static void main(String[] args) {
 		SpringApplication.run(RedlineApplication.class, args);
 	}
