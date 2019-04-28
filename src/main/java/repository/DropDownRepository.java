@@ -1,6 +1,5 @@
 package repository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -12,24 +11,19 @@ import org.springframework.stereotype.Repository;
 public class DropDownRepository {
 
 	@Autowired
-	JdbcTemplate jdbcTemplate;
-	
-	public List<Map<String, Object>> getAllCustomers() {
-		//return jdbcTemplate.queryForList("Select * from CUSTOMER");
-		return jdbcTemplate.queryForList("SELECT * FROM myTable");
-		
-	}
-	
-	public List<Map<String, Object>> getAllVehicles() {
-		return jdbcTemplate.queryForList("SELECT * FROM RLA_VHCL");
-		
-	}
+	private JdbcTemplate jdbcTemplate;
 
 	public List<Map<String, Object>> getMakeDropDownList() {
-		return jdbcTemplate.queryForList("select * from RLA_DPDN_TYPE where DPDN_TYPE = 'Make' order by DPDN_DESC");
+		return jdbcTemplate.queryForList(
+				"select * from RLA_DPDN_MAKE where MAKE_TYPE = 'Make' and MAKE_ACT = 'Y' order by MAKE_DESC");
 	}
-	
-	public List<Map<String, Object>> getModelDropDownList() {
-		return jdbcTemplate.queryForList("select * from RLA_DPDN_TYPE where DPDN_TYPE = 'Model' order by DPDN_DESC");
+
+	public List<Map<String, Object>> getModelDropDownList(int makeID) {
+		return jdbcTemplate
+				.queryForList("select * from RLA_DPDN_MODL where MAKE_ID = " + makeID + " order by MODL_DESC");
+	}
+
+	public List<Map<String, Object>> getYearDropDownList() {
+		return jdbcTemplate.queryForList("select * from RLA_DPDN_YEAR where YEAR_ACT = 'Y' order by YEAR_DESC;");
 	}
 }

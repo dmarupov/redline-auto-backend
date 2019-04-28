@@ -11,6 +11,7 @@ public class RedlineApplicationTests {
 
 	@Test
 	public void contextLoads() {
+		System.out.println("How do you like that....");
 	}
 
 }
